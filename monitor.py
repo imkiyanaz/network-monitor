@@ -15,6 +15,7 @@ SERVICES = [
 ]
 
 async def check_service(name, host, port):
+    """Check TCP connectivity and log the service status."""
     try:
         reader, writer = await asyncio.wait_for(
             asyncio.open_connection(host, port),
@@ -31,6 +32,7 @@ async def check_service(name, host, port):
     print(f"{datetime.now():%Y-%m-%d %H:%M:%S} | {message}")
 
 async def main():
+    """Monitor all services concurrently every 60 seconds."""
     while True:
         await asyncio.gather(
             *(check_service(*service) for service in SERVICES)

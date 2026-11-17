@@ -1,0 +1,15 @@
+[Unit]
+Description=Async Network Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kiyanaz
+WorkingDirectory=/home/kiyanaz/code/network-monitor
+ExecStart=/usr/bin/python3 /home/kiyanaz/code/network-monitor/monitor.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
